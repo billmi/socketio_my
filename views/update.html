@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>socket.io</title>
+</head>
+<body>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io.connect('<%= url %>');
+    socket.emit('update', {today: "SunDay"});
+</script>
+</body>
+</html>

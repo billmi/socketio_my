@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>socket.io test</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+asdasdasd
+<script>
+
+    window.onload = function () {
+        var socket = io.connect('<%= url %>');
+
+        socket.emit('test', "1312312");
+        socket.on('test', function (res) {
+            console.log(res)
+        });
+    }
+
+
+</script>
+</body>
+</html>
