@@ -7,9 +7,8 @@ var mysqlHandler = function (cfg) {
         handle: pool,
         query: function (sql, params, callback) {
             pool.getConnection(function (err, connection) {
-                if (err) throw err;
+                if (err) callback(err,null,null);
                 connection.query(sql, params, function (err, results, fields) {
-                    if (err) throw err;
                     connection.release();
                     callback(err, results, fields);
                 });

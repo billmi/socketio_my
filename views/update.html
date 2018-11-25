@@ -5,11 +5,11 @@
     <title>socket.io</title>
 </head>
 <body>
-
+update
 <script src="/socket.io/socket.io.js"></script>
 <script>
     var socket = io.connect('<%= url %>');
-    socket.emit('update', {today: "SunDay"});
+    socket.emit('update', "SunDay");
 </script>
 </body>
 </html>

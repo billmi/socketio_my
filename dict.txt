@@ -1,0 +1,77 @@
+#用于查询
+Rooms:
+
+允许相连接的client端组成一个集合，这样可以将时间发送到相链接clients的子集，有一个简单的方法管理。
+
+socket.join('room')
+
+socket.leave("room")
+
+两种方法将时间发送到room中：socket.broadcast.to('room')和io.sockets.in('room')
+
+socket.broadcast.to('room').emit('event_name',data)//emit to 'room' except this socket／＊发送消息给room所有的socket client端，除了发送者自己＊／
+
+
+
+socket.broadcast.emit('event_name',data)//emit to all sockets except this one／＊发送信息给所有连接到server的client端＊／
+
+
+
+io.sockets.in('room').emit('event_name',data)//emit to all clients in a particular room／＊发送消息给room所有的socket client端＊／
+
+
+
+io.sockets.emit('event_name',data) //emit an event to all clients／＊发送信息给所有连接到server的client端＊／
+
+
+
+io.of('namespace').in('room').emit();// emit an event to all clients in a namespace of a particular room
+
+
+-------------------------------------------------------------------------------------------------------------
+
+// send to current request socket client
+socket.emit('message', "this is a test");
+
+// sending to all clients except sender
+socket.broadcast.emit('message', "this is a test");
+
+// sending to all clients in 'game' room(channel) except sender
+socket.broadcast.to('game').emit('message', 'nice game');
+
+// sending to all clients, include sender
+io.sockets.emit('message', "this is a test");
+
+// sending to all clients in 'game' room(channel), include sender
+io.sockets.in('game').emit('message', 'cool game');
+
+// sending to individual socketid
+io.sockets.socket(socketid).emit('message', 'for your eyes only');
+
+//广播给所有除了当前连接
+socket.broadcast.emit
+
+#用于分组管理
+io.sockets.on('connection', function (socket) {
+  socket.on('firefox', function (data) {
+    socket.join('firefox');
+  });
+  socket.on('chrome',function(data){
+    socket.join('chrome');
+  });
+});
+
+#向分组发消息
+socket.broadcast.to('xxxxx').emit('event_name', data);
+  //emit to 'room' except this socket client
+io.sockets.in('ccccccc').emit('event_name', data)
+  //emit to all socket client in the room
+
+#订阅与取消订阅
+socket.on('subscribe', function(data) {
+    socket.join(data.room);
+})
+
+socket.on('unsubscribe', function(data) {
+    socket.leave(data.room);
+})

@@ -6,18 +6,17 @@
     <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
-asdasdasd
+index
 <script>
 
     window.onload = function () {
         var socket = io.connect('<%= url %>');
-
+        console.log(socket);
         socket.emit('test', "1312312");
         socket.on('test', function (res) {
-            console.log(res)
+            alert(res);
         });
     }
-
 
 </script>
 </body>
